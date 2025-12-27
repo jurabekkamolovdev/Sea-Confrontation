@@ -1,7 +1,7 @@
-import { Ship } from "../exercise1/exercise-1.js";
+// import { Ship } from "../exercise1/exercise-1.js";
 
 
-class Board {
+export class Board {
     constructor(size) {
         this.size = size;
         this.grid = Array.from({length: size}, () => new Array(size).fill(null));
@@ -97,10 +97,10 @@ class Board {
 }
 
 
-const boardSize = Number(prompt("Board hajmini kiriting:"));
-const board = new Board(boardSize);
+// const boardSize = Number(prompt("Board hajmini kiriting:"));
+// const board = new Board(boardSize);
 
-const ship = new Ship("ShipTest", 3, 0);
-board.placeShip(ship, 0, 0);
+// const ship = new Ship("ShipTest", 3, 0);
+// board.placeShip(ship, 0, 0);
 
-console.log(`${board.boardSize}, ${board.receiveAttack(0, 0)}`);
+// console.log(`${board.boardSize}, ${board.receiveAttack(0, 0)}`);
