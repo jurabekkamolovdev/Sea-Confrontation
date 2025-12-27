@@ -1,4 +1,4 @@
-class Ship {
+export class Ship {
     constructor(name, length, orientation) {
         this.name = name;
         this.length = length;
@@ -57,10 +57,10 @@ class Ship {
     }
 }
 
-const shipName = prompt("Ship nomini kiritin:");
-const shipLength = Number(prompt("Ship uzunligini kiriting:"));
-const shipOrientation = prompt("Ship yo'nalishini kiriting (0 — gorizontal, 1 — vertikal):")
+// const shipName = prompt("Ship nomini kiritin:");
+// const shipLength = Number(prompt("Ship uzunligini kiriting:"));
+// const shipOrientation = prompt("Ship yo'nalishini kiriting (0 — gorizontal, 1 — vertikal):")
 
-const ship = new Ship(shipName, shipLength, shipOrientation);
+// const ship = new Ship(shipName, shipLength, shipOrientation);
 
-console.log(`${ship.shipName}, ${ship.shipLength}, ${ship.shipOrientation}, ${ship.shipIsSunk}`)
+// console.log(`${ship.shipName}, ${ship.shipLength}, ${ship.shipOrientation}, ${ship.shipIsSunk}`)
