@@ -1,7 +1,7 @@
-import { Ship } from "../exercise1/exercise-1.js";
-import { Board } from "../exercise2/exercise-2.js";
+// import { Ship } from "../exercise1/exercise-1.js";
+// import { Board } from "../exercise2/exercise-2.js";
 
-class Player {
+export class Player {
     constructor(name, boardSize) {
         this.name = name;
         this.boardSize = boardSize;
@@ -43,6 +43,6 @@ class Player {
     }
 }
 
-const [name, boardSize] = prompt("Ismingizni va Board o'lachamini kiriting (Maks 5)").split(" ");
-const player = new Player(name, Number(boardSize));
-console.log(`"${player.playerName}", ${player.boardSize}`);
+// const [name, boardSize] = prompt("Ismingizni va Board o'lachamini kiriting (Maks 5)").split(" ");
+// const player = new Player(name, Number(boardSize));
+// console.log(`"${player.playerName}", ${player.boardSize}`);

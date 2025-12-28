@@ -24,11 +24,11 @@ export class Board {
         const startX = x;
         const startY = y;
         
-        if(ship.shipOrientation === 0) {  // Gorizontal
+        if(ship.shipOrientation === 0) {
             for(let i = 0; i < ship.shipLength; i++) {
                 this.grid[x][y + i] = ship;
             }
-        } else {  // Vertikal
+        } else {
             for(let i = 0; i < ship.shipLength; i++) {
                 this.grid[x + i][y] = ship;
             }
@@ -76,7 +76,6 @@ export class Board {
                 if(cell === null) {
                     temp += 'O';
                 } else {
-                    // Tekshirish kerak - bu katak urilganmi?
                     let hitPosition;
                     if(cell.shipOrientation === 0) {
                         hitPosition = j - cell.shipStartPosition.y;
