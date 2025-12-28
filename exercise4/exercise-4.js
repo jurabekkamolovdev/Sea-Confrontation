@@ -43,10 +43,10 @@ class App {
         }
 
         for(let i = 0; i < shipCount; i++) {
-            const shipName = prompt(`${i+1} - Kemani nomini kiriting:`);
-            const shipLength = Number(prompt(`${i+1} - Kemani uzunligini kiriting kiriting:`));
-            const shipOrientation = Number(prompt(`${i+1} - Kema (Hozintal - 0) (Vertical - 1):`));
-            const [x, y] = prompt(`${i+1} - Kemani start pozitsiyalri x va y:`)
+            const shipName = prompt(`${player.playerName} ${i+1} - Kemani nomini kiriting:`);
+            const shipLength = Number(prompt(`${player.playerName} ${i+1} - Kemani uzunligini kiriting kiriting:`));
+            const shipOrientation = Number(prompt(`${player.playerName} ${i+1} - Kema (Hozintal - 0) (Vertical - 1):`));
+            const [x, y] = prompt(`${player.playerName} ${i+1} - Kemani start pozitsiyalri x va y:`)
                                             .split(" ")
                                             .map(num => Number(num));
             player.placeShips(shipName, shipLength, shipOrientation, {x: x, y: y});
@@ -60,6 +60,17 @@ class App {
         this.firstPlayer = new Player(firstPlayerName, this.boardSize);
         this.secondPlayer = new Player(secondPlayerName, this.boardSize);
 
-        
+        this.shipArrangement(this.firstPlayer, maxShipCount, this.maxShipLength);
+        this.shipArrangement(this.secondPlayer, maxShipCount, this.maxShipLength);
+        // const tempPlayer = this.firstPlayer;
+        // let count = 1;
+        // for(let i = 0; i < (this.boardSize * 2); i++) {
+        //     if(i === (this.boardSize - 1)) {
+        //         tempPlayer = secondPlayer;
+        //         count = 1;
+        //     }
+
+            
+        // }
     }
 }
