@@ -34,6 +34,6 @@ export class Player {
     }
 }
 
-const [name, boardSize] = prompt("Ism va board o'lchami:").split(" ");
-const player = new Player(name, Number(boardSize));
-console.log(`"${player.name}", ${player.boardSize}`);
+// const [name, boardSize] = prompt("Ism va board o'lchami:").split(" ");
+// const player = new Player(name, Number(boardSize));
+// console.log(`"${player.name}", ${player.boardSize}`);
