@@ -12,7 +12,7 @@ class Board {
     set size(size) { this._size = size; }
 
 
-    get grid() { return this._grid; }
+    get grid()`` { return this._grid; }
     set grid(grid) { this._grid = grid; }
 
     get ships() { return this._ships; }
