@@ -35,11 +35,11 @@ export class Ship {
     }
 }
 
-const input = prompt("Kema malumotlarini kiriting(Kema nomi, uzunligini va {Horizontal - 0 : Vertikal - 1}):");
-const [shipName, shipLength, shipOrientation] = input.split(" ");
-const ship = new Ship(shipName, Number(shipLength), Number(shipOrientation));
+// const input = prompt("Kema malumotlarini kiriting(Kema nomi, uzunligini va {Horizontal - 0 : Vertikal - 1}):");
+// const [shipName, shipLength, shipOrientation] = input.split(" ");
+// const ship = new Ship(shipName, Number(shipLength), Number(shipOrientation));
 
-ship.hits[0] = true;
-ship.hits[1] = true;
+// ship.hits[0] = true;
+// ship.hits[1] = true;
 
-console.log(`"${ship.name}", ${ship.length}, ${ship.orientation}, ${ship.isSunk()}`);
+// console.log(`"${ship.name}", ${ship.length}, ${ship.orientation}, ${ship.isSunk()}`);

@@ -1,50 +1,44 @@
-// import { Ship } from "../exercise1/exercise-1.js";
+import { Ship } from "../exercise1/exercise-1.js";
 
 
-export class Board {
+class Board {
     constructor(size) {
-        this.size = size;
-        this.grid = Array.from({length: size}, () => new Array(size).fill(null));
-        this.ships = [];
+        this._size = size;
+        this._grid = Array.from({length: size}, () => new Array(size).fill(null));
+        this._ships = [];
     }
 
-    get boardSize() {
-        return this.size;
-    }
+    get size() { return this._size; }
+    set size(size) { this._size = size; }
 
-    get boardGrid() {
-        return this.grid;
-    }
 
-    get boardShips() {
-        return this.ships;
-    }
+    get grid() { return this._grid; }
+    set grid(grid) { this._grid = grid; }
+
+    get ships() { return this._ships; }
+    set ships(ships) { this._ships = ships; }
 
     placeShip(ship, x, y) {
-        const startX = x;
-        const startY = y;
-        
         if(ship.shipOrientation === 0) {
-            for(let i = 0; i < ship.shipLength; i++) {
-                this.grid[x][y + i] = ship;
+            for(let i = 0; i < ship.length; i++) {
+                this._grid[x][y + i] = ship;
             }
         } else {
-            for(let i = 0; i < ship.shipLength; i++) {
-                this.grid[x + i][y] = ship;
+            for(let i = 0; i < ship.length; i++) {
+                this._grid[x + i][y] = ship;
             }
         }
         
-        ship.shipStartPosition = {x: startX, y: startY};
-        this.ships.push(ship);
+        ship.startPosition = {x, y};
+        this._ships.push(ship);
     }
 
     findAvailableCells() {
         const result = [];
-
-        for(let i = 0; i < this.size; i++) {
-            for(let j = 0; j < this.size; j++) {
-                if(this.grid[i][j] === null) {
-                    result.push(`{x:${i}, y:${j}}`);
+        for(let i = 0; i < this._size; i++) {
+            for(let j = 0; j < this._size; j++) {
+                if(this._grid[i][j] === null) {
+                    result.push({ x: i, y: j });
                 }
             }
         }
@@ -52,42 +46,37 @@ export class Board {
     }
 
     receiveAttack(x, y) {
-        const ship = this.grid[x][y];
+        const ship = this._grid[x][y];
         if(ship === null) {
             return false;
         }
         
         let hitPosition;
-        if(ship.shipOrientation === 0) {
-            hitPosition = y - ship.shipStartPosition.y;
+        if(ship.orientation === 0) {
+            hitPosition = y - ship.startPosition.y;
         } else {
-            hitPosition = x - ship.shipStartPosition.x;
+            hitPosition = x - ship.startPosition.x;
         }
         
-        ship.shipHit(hitPosition);
+        ship.hit(hitPosition);
         return true;
     }
 
     display() {
-        for(let i = 0; i < this.size; i++) {
+        for(let i = 0; i < this._size; i++) {
             let temp = '';
-            for(let j = 0; j < this.size; j++) {
-                const cell = this.grid[i][j];
+            for(let j = 0; j < this._size; j++) {
+                const cell = this._grid[i][j];
                 if(cell === null) {
                     temp += 'O';
                 } else {
                     let hitPosition;
-                    if(cell.shipOrientation === 0) {
-                        hitPosition = j - cell.shipStartPosition.y;
+                    if(cell.orientation === 0) {
+                        hitPosition = j - cell.startPosition.y;
                     } else {
-                        hitPosition = i - cell.shipStartPosition.x;
+                        hitPosition = i - cell.startPosition.x;
                     }
-                    
-                    if(cell.shipHits[hitPosition]) {
-                        temp += 'X';
-                    } else {
-                        temp += 'S';
-                    }
+                    temp += cell.hits[hitPosition] ? 'X' : 'S';
                 }
             }
             console.log(temp);
@@ -96,10 +85,8 @@ export class Board {
 }
 
 
-// const boardSize = Number(prompt("Board hajmini kiriting:"));
-// const board = new Board(boardSize);
-
-// const ship = new Ship("ShipTest", 3, 0);
-// board.placeShip(ship, 0, 0);
-
-// console.log(`${board.boardSize}, ${board.receiveAttack(0, 0)}`);
+const boardSize = Number(prompt("Board hajmini kiriting:"));
+const board = new Board(boardSize);
+const ship = new Ship("ShipTest", 3, 0);
+board.placeShip(ship, 0, 0);
+console.log(`${board.size}, ${board.receiveAttack(1, 0)}`);
