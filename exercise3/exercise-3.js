@@ -17,6 +17,10 @@ export class Player {
         return this.boardSize;
     }
 
+    get playerBoard() {
+        return this.board;
+    }
+
     set playerName(name) {
         this.name = name;
     }

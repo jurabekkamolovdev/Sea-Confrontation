@@ -1,66 +1,45 @@
 export class Ship {
     constructor(name, length, orientation) {
-        this.name = name;
-        this.length = length;
-        this.orientation = orientation;
+        this._name = name;
+        this._length = length;
+        this._orientation = orientation;
 
-        this.hits = new Array(this.length).fill(false);
-        this.startPosition = {
+        this._hits = new Array(this.length).fill(false);
+        this._startPosition = {
             x: 0,
             y: 0
         }
     }
 
-    get shipName() {
-        return this.name;
+    get name() { return this._name; }
+    set name(name) { this._name = name; }
+
+    get length() { return this._length; }
+    set length(length) { this._length = length; }
+
+    get orientation() { return this._orientation; }
+    set orientation(orientation) { this._orientation = orientation; }
+
+    get hits() { return this._hits; }
+    set hits(hits) { this._hits = hits; }
+
+    get startPosition() { return this._startPosition; }
+    set startPosition(pos) { this._startPosition = pos; }
+
+    hit(position) {
+        this._hits[position] = true;
     }
 
-    get shipLength() {
-        return this.length
-    }
-
-    get shipOrientation() {
-        return this.orientation;
-    }
-
-    get shipHits() {
-        return this.hits;
-    }
-
-    get shipStartPosition() {
-        return this.startPosition;
-    }
-
-    set shipName(name) {
-        this.name = name;
-    }
-
-    set shipLength(length) {
-        this.length = length;
-    }
-
-    set shipOrientation(orientation) {
-        this.orientation = orientation;
-    }
-
-    set shipStartPosition(startPosition) {
-        this.startPosition.x = startPosition.x;
-        this.startPosition.y = startPosition.y;
-    }
-
-    shipHit(position) {
-       this.hits[position] = true; 
-    }
-
-    shipIsSunk() {
-        return this.hits.every(h => h)
+    isSunk() {
+        return this._hits.every( h => h);
     }
 }
 
-// const shipName = prompt("Ship nomini kiritin:");
-// const shipLength = Number(prompt("Ship uzunligini kiriting:"));
-// const shipOrientation = prompt("Ship yo'nalishini kiriting (0 — gorizontal, 1 — vertikal):")
+const input = prompt("Kema malumotlarini kiriting(Kema nomi, uzunligini va {Horizontal - 0 : Vertikal - 1}):");
+const [shipName, shipLength, shipOrientation] = input.split(" ");
+const ship = new Ship(shipName, Number(shipLength), Number(shipOrientation));
 
-// const ship = new Ship(shipName, shipLength, shipOrientation);
+ship.hits[0] = true;
+ship.hits[1] = true;
 
-// console.log(`${ship.shipName}, ${ship.shipLength}, ${ship.shipOrientation}, ${ship.shipIsSunk}`)
+console.log(`"${ship.name}", ${ship.length}, ${ship.orientation}, ${ship.isSunk()}`);

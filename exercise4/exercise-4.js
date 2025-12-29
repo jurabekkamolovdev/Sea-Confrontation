@@ -1,37 +1,38 @@
 import { Player } from "../exercise3/exercise-3";
+import { Board } from "../exercise2/exercise-2";
 
 class App {
     constructor(boardSize, maxShipLength, maxShipCount) {
-        this.boardSize = boardSize;
-        this.maxShipLength = maxShipLength;
-        this.maxShipCount = maxShipCount;
+        this._boardSize = boardSize;
+        this._maxShipLength = maxShipLength;
+        this._maxShipCount = maxShipCount;
 
-        this.firstPlayer;
-        this.secondPlayer;
+        this.firstPlayer = null;
+        this.secondPlayer = null;
     }
 
     get boardSize() {
-        return this.boardSize;
-    }
-
-    get maxShipLength() {
-        return this.maxShipLength;
-    }
-
-    get maxShipCount() {
-        return this.maxShipCount;
+        return this._boardSize;
     }
 
     set boardSize(size) {
-        this.boardSize = size;
+        this._boardSize = size;
     }
 
-    set maxShipLength(shipLength) {
-        this.maxShipLength = shipLength;
+    get maxShipLength() {
+        return this._maxShipLength;
     }
 
-    set maxShipCount(shipCount) {
-        this.maxShipCount = shipCount;
+    set maxShipLength(length) {
+        this._maxShipLength = length;
+    }
+
+    get maxShipCount() {
+        return this._maxShipCount;
+    }
+
+    set maxShipCount(count) {
+        this._maxShipCount = count;
     }
 
     shipArrangement(player, shipCount, maxShipLength) {
@@ -60,17 +61,30 @@ class App {
         this.firstPlayer = new Player(firstPlayerName, this.boardSize);
         this.secondPlayer = new Player(secondPlayerName, this.boardSize);
 
-        this.shipArrangement(this.firstPlayer, maxShipCount, this.maxShipLength);
-        this.shipArrangement(this.secondPlayer, maxShipCount, this.maxShipLength);
-        // const tempPlayer = this.firstPlayer;
-        // let count = 1;
-        // for(let i = 0; i < (this.boardSize * 2); i++) {
-        //     if(i === (this.boardSize - 1)) {
-        //         tempPlayer = secondPlayer;
-        //         count = 1;
-        //     }
+        this.shipArrangement(this.firstPlayer, this.maxShipCount, this.maxShipLength);
+        this.shipArrangement(this.secondPlayer, this.maxShipCount, this.maxShipLength);
 
+        let currentPlayer = this.firstPlayer;
+        let opponentPlayer = this.secondPlayer;
+
+        while(true) {
+            const {opponent, x, y} = currentPlayer.takeTurn(opponentPlayer);
+
+            const hit = opponent.board.receiveAttack(x, y);
             
-        // }
+            if(hit === true) {
+                const allSunk = opponent.board.ships.every(ship => ship.shipIsSunk());
+
+                if(allSunk) {
+                    console.log(`Win ${currentPlayer.playerName}`);
+                    break;
+                }
+
+                [currentPlayer, opponentPlayer] = [opponentPlayer, currentPlayer];
+            }
+
+
+
+        }
     }
 }

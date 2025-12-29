@@ -16,7 +16,7 @@ export class Board {
         return this.grid;
     }
 
-    get boardShipa() {
+    get boardShips() {
         return this.ships;
     }
 
