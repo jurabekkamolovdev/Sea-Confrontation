@@ -47,6 +47,6 @@ export class Player {
     }
 }
 
-// const [name, boardSize] = prompt("Ismingizni va Board o'lachamini kiriting (Maks 5)").split(" ");
-// const player = new Player(name, Number(boardSize));
-// console.log(`"${player.playerName}", ${player.boardSize}`);
+const [name, boardSize] = prompt("Ismingizni va Board o'lachamini kiriting (Maks 5)").split(" ");
+const player = new Player(name, Number(boardSize));
+console.log(`"${player.playerName}", ${player.boardSize}`);
