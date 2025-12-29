@@ -9,7 +9,7 @@ export class Player {
         this.board = new Board(this.boardSize);
     }
 
-    get playerName() {
+    get name() {
         return this.name;
     }
 
