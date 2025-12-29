@@ -1,33 +1,22 @@
-// import { Ship } from "../exercise1/exercise-1.js";
-// import { Board } from "../exercise2/exercise-2.js";
+import { Ship } from "../exercise1/exercise-1.js";
+import { Board } from "../exercise2/exercise-2.js";
 
 export class Player {
     constructor(name, boardSize) {
-        this.name = name;
-        this.boardSize = boardSize;
+        this._name = name;
+        this._boardSize = boardSize;
 
-        this.board = new Board(this.boardSize);
+        this._board = new Board(this.boardSize);
     }
 
-    get name() {
-        return this.name;
-    }
+    get name() { return this._name; }
+    set name(name) { return this._name = name; }
 
-    get playerBoardSize() {
-        return this.boardSize;
-    }
+    get boardSize() { return this._boardSize; }
+    set boardSize(boardSize) { this._boardSize = boardSize; }
 
-    get playerBoard() {
-        return this.board;
-    }
-
-    set playerName(name) {
-        this.name = name;
-    }
-
-    set playerBoardSize(boardSize) {
-        this.boardSize = boardSize;
-    }
+    get board() { return this._board; }
+    set board(board) { this._board = board; }
 
     placeShips(shipName, length, isVertical, startPosition) {
         const ship = new Ship(shipName, length, isVertical);
@@ -36,17 +25,15 @@ export class Player {
     }
 
     takeTurn(opponent) {
-        const [positionX, positionY] = prompt("Hujum uchun kordinata bering (x y)")
+        const [x, y] = prompt("Hujum uchun kordinata bering (x y)")
                                         .split(" ")
                                         .map(num => Number(num));
         return {
-            opponent: opponent,
-            x: positionX,
-            y: positionY
-        }
+            opponent, x, y
+        };
     }
 }
 
-const [name, boardSize] = prompt("Ismingizni va Board o'lachamini kiriting (Maks 5)").split(" ");
+const [name, boardSize] = prompt("Ism va board o'lchami:").split(" ");
 const player = new Player(name, Number(boardSize));
-console.log(`"${player.playerName}", ${player.boardSize}`);
+console.log(`"${player.name}", ${player.boardSize}`);
