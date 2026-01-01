@@ -1,8 +1,8 @@
 import { Player } from "../exercise3/exercise-3.js";
 
 class HumanPlayer extends Player {
-    constructor(name, boarSize) {
-        super(name, boarSize);
+    constructor(name, boardSize) {
+        super(name, boardSize);
     }
 
     placeShips(shipName, length, isVertical, startPosition) {

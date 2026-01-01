@@ -35,7 +35,7 @@ class App {
 
         for(let i = 0; i < shipCount; i++) {
             const shipName = prompt(`${player.name} ${i+1} - Kemani nomini kiriting:`);
-            const shipLength = Number(prompt(`${player.name} ${i+1} - Kemani uzunligini kiriting:`));
+            const shipLength = Number(prompt(`Max:${this.maxShipLength} ${player.name} ${i+1}-Kemani uzunligini kiriting:`));
             const shipOrientation = Number(prompt(`${player.name} ${i+1} - Kema (Horizontal - 0) (Vertical - 1):`));
             const [x, y] = prompt(`${player.name} ${i+1} - Kemani start pozitsiyalari x va y:`)
                                             .split(" ")
@@ -48,22 +48,23 @@ class App {
 
     run() {
 
-        const isAi = Number(prompt("Salom Ai bilan o'ynamoqchimisiz yoki da do'stingizbilan \\\
-            (1 - Do'stingiz : 0 - Ai:"));
+        const isAi = Number(prompt("1 - Odam vs Odam, 0 - Odam vs AI:"));
 
         if (isAi === 0) {
-            const firstPlayerName = prompt("o'yinchi ismingizni kiriting:"); 
+            const firstPlayerName = prompt("O'yinchi ismingizni kiriting:"); 
 
             this.firstPlayer = new Player(firstPlayerName, this._boardSize);
-            this.secondPlayer = new AIPlayer("Ai", this._boardSize);
+            this.secondPlayer = new AIPlayer("AI", this._boardSize);
+
+            console.log(`O'yinchilar: ${this.firstPlayer.name} vs ${this.secondPlayer.name}`);
 
             this.shipArrangement(this.firstPlayer, this.maxShipCount, this.maxShipLength);
 
             for(let i = 0; i < this._maxShipCount; i++) {
                 const length = Math.floor(Math.random() * this._maxShipLength) + 1;
-                this.secondPlayer.placeShips(`ShipNumber-${i+1}`, length);
+                this.secondPlayer.placeShips(`AI-ShipNumber-${i+1}`, length);
             }
-
+            console.log(`${this.secondPlayer.name} kemalarini joylashtirdi`);
         } else {
         const firstPlayerName = prompt("1 - o'yinchi ismingizni kiriting:");
         const secondPlayerName = prompt("2 - o'yinchi ismingizni kiriting:");
@@ -85,12 +86,16 @@ class App {
             const hit = opponent.board.receiveAttack(x, y);
             
             if(hit === true) {
+                console.log(`${currentPlayer.name} to'g'ri urdi!`);
                 const allSunk = opponent.board.ships.every(ship => ship.isSunk());
 
                 if(allSunk) {
-                    console.log(currentPlayer.playerName);
+
+                    console.log(`🎉 ${currentPlayer.name} yutdi! 🎉`);
                     break;
-                }
+                } 
+            } else {
+                console.log(`${currentPlayer.name} urdisi bo'sh o'tdi`);
             }
             
             [currentPlayer, opponentPlayer] = [opponentPlayer, currentPlayer];

@@ -5,7 +5,7 @@ export class AIPlayer extends Player {
         super(name, boardSize);
     }
 
-    placeShips(shipName, length, isVertical, startPosition) {
+    placeShips(shipName, length) {
         const availableCells = this.board.findAvailableCells();
 
         const randomIndex = Math.floor(Math.random() * availableCells.length);

@@ -10,7 +10,7 @@ export class Player {
     }
 
     get name() { return this._name; }
-    set name(name) { return this._name = name; }
+    set name(name) { this._name = name; }
 
     get boardSize() { return this._boardSize; }
     set boardSize(boardSize) { this._boardSize = boardSize; }
