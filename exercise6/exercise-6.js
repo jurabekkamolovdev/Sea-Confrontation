@@ -1,19 +1,19 @@
 import { Player } from "../exercise3/exercise-3.js";
 
-class AIPlayer extends Player {
+export class AIPlayer extends Player {
     constructor(name, boardSize) {
         super(name, boardSize);
     }
 
     placeShips(shipName, length, isVertical, startPosition) {
-        const availableCells = this._board.findAvailableCells();
+        const availableCells = this.board.findAvailableCells();
 
         const randomIndex = Math.floor(Math.random() * availableCells.length);
         const start = availableCells[randomIndex];
 
         const vertical = Number(Math.random() > 0.5);
 
-        super.placeShips(shipName, length, start, vertical);
+        super.placeShips(shipName, length, vertical, start);
     }
 
     takeTurn(opponent) {

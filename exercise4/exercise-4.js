@@ -1,4 +1,5 @@
 import { Player } from "../exercise3/exercise-3.js";
+import { AIPlayer } from "../exercise6/exercise-6.js"
 
 class App {
     constructor(boardSize, maxShipLength, maxShipCount) {
@@ -46,6 +47,24 @@ class App {
     }
 
     run() {
+
+        const isAi = Number(prompt("Salom Ai bilan o'ynamoqchimisiz yoki da do'stingizbilan \\\
+            (1 - Do'stingiz : 0 - Ai:"));
+
+        if (isAi === 0) {
+            const firstPlayerName = prompt("o'yinchi ismingizni kiriting:"); 
+
+            this.firstPlayer = new Player(firstPlayerName, this._boardSize);
+            this.secondPlayer = new AIPlayer("Ai", this._boardSize);
+
+            this.shipArrangement(this.firstPlayer, this.maxShipCount, this.maxShipLength);
+
+            for(let i = 0; i < this._maxShipCount; i++) {
+                const length = Math.floor(Math.random() * this._maxShipLength) + 1;
+                this.secondPlayer.placeShips(`ShipNumber-${i+1}`, length);
+            }
+
+        } else {
         const firstPlayerName = prompt("1 - o'yinchi ismingizni kiriting:");
         const secondPlayerName = prompt("2 - o'yinchi ismingizni kiriting:");
 
@@ -54,6 +73,9 @@ class App {
 
         this.shipArrangement(this.firstPlayer, this.maxShipCount, this.maxShipLength);
         this.shipArrangement(this.secondPlayer, this.maxShipCount, this.maxShipLength);
+        }
+
+
 
         let currentPlayer = this.firstPlayer;
         let opponentPlayer = this.secondPlayer;
